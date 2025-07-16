@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client'
 import './main.scss'
+import { PageCatalog } from './pages/pageCatalog'
 
-import Catalog from './pages/catalog'
 
-createRoot(document.getElementById('catalog')).render(
-    <Catalog />
+createRoot(document.getElementById('root')).render(
+    <PageCatalog />
 ) 

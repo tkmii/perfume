@@ -1,0 +1,17 @@
+.flex-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 50px;
+
+  .filter {
+    width: 250px;
+    flex-shrink: 0;
+  }
+}

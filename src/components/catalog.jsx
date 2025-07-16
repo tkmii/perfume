@@ -20,7 +20,10 @@ export default function Catalog() {
 
   return (
     <>
-      <Item data={data} />
+      <div className="catalog" id="catalog">
+        <Item data={data} />
+      </div>
+
     </>
   );
 }

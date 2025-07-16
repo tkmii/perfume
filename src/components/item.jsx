@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import Spinner from "./spinner";
 
-
 export default function Item({ data }) {
 
   const listItems = data && data.map(element =>
