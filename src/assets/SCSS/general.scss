@@ -1,0 +1,117 @@
+@import '../SCSS/variables.scss';
+
+/* Общий */
+body {
+    font-family: "Jost", serif;
+    margin: 0 auto;
+    max-width: 1250px;
+    font-size: 16px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+input {
+    outline: none;
+}
+
+h1, h2, h3 {
+    font-weight: 400;
+}
+
+/* Заголовок */
+.main-title {
+    font-size: 30px;
+}
+
+/* Обёртка */
+.flex-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Поиск */
+.search {
+
+    &-input {
+        width: 300px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid $grey;
+        cursor: pointer;
+    }
+}
+
+/* Сортировка */
+.sorting {
+    display: flex;
+    gap: 15px;
+
+    &-btn {
+        border-radius: 5px;
+        background-color: $pink;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 7px;
+        cursor: pointer;
+
+        svg {
+            fill: $black;
+            transition: $transition;
+        }
+        &:hover {
+
+            svg {
+                opacity: 0.5;
+            }
+        }
+    }
+}
+
+/* Фильтр */
+
+.filter {
+    background-color: $pink;
+    border-radius: 10px;
+    padding: 0 15px;
+    height: 100%;
+
+    &-list {
+        padding-left: 15px;
+
+        li {
+            list-style: none;
+            transition: $transition;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            &:hover {
+                opacity: 0.5;
+            }
+            svg.down {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+/* Не совсем поняла, что это */
+
+.page {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 50px;
+
+    .filter {
+        width: 250px;
+        flex-shrink: 0;
+    }
+}

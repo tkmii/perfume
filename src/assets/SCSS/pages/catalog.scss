@@ -1,0 +1,55 @@
+.catalog {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 20px;
+
+    &-item {
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid $grey;
+        position: relative;
+        transition: box-shadow 0.5s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+
+        &__img {
+            height: 200px;
+            
+            &-wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+        }
+        &__icon {
+            position: absolute;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: $pink;
+            right: 20px;
+            cursor: pointer;
+            transition: $transition;
+            
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+        &__title {
+            margin: 0;
+            margin-bottom: 15px;
+            font-size: 21px;
+        }
+        &__descr {
+            margin-bottom: 15px;
+        }
+        &__price {
+            font-size: 25px;
+            margin-top: auto;
+        }
+        &:hover {
+            box-shadow: 1px 6px 23px 7px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
