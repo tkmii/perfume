@@ -9,7 +9,7 @@ import Error from "../components/ui/Error";
 import Spinner from "../components/ui/spinner";
 
 export function PageCatalog() {
-  const [isLoading, isError, data, errorText] = useFetch('https://raw.githubusercontent.com/tkmii/perfume/refs/heads/main/perfume.json')
+  const [isLoading, isError, data, errorText] = useFetch('https://raw.githubusercontent.com/tkmii/perfume/refs/heads/main/perfume.json', 'all')
   const [filtredData, setFiltredData] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
 
