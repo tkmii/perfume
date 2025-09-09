@@ -1,9 +1,9 @@
-export default function Search({ searchTerm, onSearchChange }) {
+export default function Search({ value, setValue }) {
   return (
     <div className="search">
       <input
-        value={searchTerm}
-        onChange={(e) => onSearchChange(e.target.value)}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         className="search-input"
         type="text"
         placeholder="Поиск"

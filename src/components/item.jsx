@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Spinner from "./spinner";
+import Spinner from "./ui/spinner";
 
 export default function Item({ data }) {
 
