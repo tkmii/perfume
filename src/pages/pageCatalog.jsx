@@ -12,9 +12,6 @@ export function PageCatalog() {
   const [isLoading, isError, data, errorText] = useFetch('https://raw.githubusercontent.com/tkmii/perfume/refs/heads/main/perfume.json', 'all')
   const [filtredData, setFiltredData] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const [notesSort, setNotesSort] = useState([])
-  const [chordsSort, setChordsSort] = useState([])
-  const priceSort = ['По возрастанию цены', 'По убыванию цены']
 
   useEffect(() => {
     if (data) {
@@ -41,23 +38,6 @@ export function PageCatalog() {
 
   // }, [searchTerm, data]);
 
-  useEffect(() => {
-    const chordsOriginal = data.map((item) => item.chords)
-    const notesOriginal = data.map((item) => {
-      if (item.notes.length) {
-        return item.notes
-      } else {
-        const combinedArray = item.notes.top.concat(item.notes.middle, item.notes.basic)
-        return combinedArray
-      }
-    });
-
-    let notes = [...new Set(notesOriginal.flat())];
-    let chords = [...new Set(chordsOriginal.flat())];
-
-    setChordsSort(chords.sort())
-    setNotesSort(notes.sort())
-  }, [data])
 
   return (
     <div>
@@ -67,7 +47,7 @@ export function PageCatalog() {
         <Sorting />
       </div>
       <div className="page" id="page">
-        <Filter notes={notesSort} chords={chordsSort} price={priceSort} />
+        <Filter data={data} />
         {isLoading ? (
           <Spinner />
         ) : isError ? (
