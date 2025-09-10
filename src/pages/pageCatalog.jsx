@@ -14,6 +14,7 @@ export function PageCatalog() {
   const [searchTerm, setSearchTerm] = useState('')
   const [notesSort, setNotesSort] = useState([])
   const [chordsSort, setChordsSort] = useState([])
+  const priceSort = ['По возрастанию цены', 'По убыванию цены']
 
   useEffect(() => {
     if (data) {
@@ -66,7 +67,7 @@ export function PageCatalog() {
         <Sorting />
       </div>
       <div className="page" id="page">
-
+        <Filter notes={notesSort} chords={chordsSort} price={priceSort} />
         {isLoading ? (
           <Spinner />
         ) : isError ? (
