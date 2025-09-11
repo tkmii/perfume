@@ -22,9 +22,9 @@ export default function Filter({ data }) {
     <>
       <div className="filter">
         <h2 className="filter-title">Фильтры</h2>
-        <FilterItem title="По цене:" data={priceItems} />
-        <FilterItem title="По нотам:" data={notesItems} />
-        <FilterItem title="По аккордам:" data={chordsItems} />
+        <FilterItem title="По цене:" data={priceItems} custom={true} originalData={data} liDataAttr='price' />
+        <FilterItem title="По нотам:" data={notesItems} custom={false} originalData={data} liDataAttr='notes' />
+        <FilterItem title="По аккордам:" data={chordsItems} custom={false} originalData={data} liDataAttr='chords' />
       </div>
     </>
   )

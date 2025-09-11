@@ -4,7 +4,7 @@ import Error from "./ui/Error";
 
 export default function Catalog({ data }) {
 
-  if (data.length === 0) return <Error text="Результатов нет" />
+  if (data.length == 0) return <Error text="Результатов нет" />
   else
     return (
       <>

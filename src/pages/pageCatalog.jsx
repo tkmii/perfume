@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useFilterStore } from '../store/store'
+import { useEffect } from 'react';
 import useFetch from "../hooks/useFetch";
 import Catalog from '../components/catalog'
 import Search from '../components/Search'
@@ -10,40 +11,18 @@ import Spinner from "../components/ui/spinner";
 
 export function PageCatalog() {
   const [isLoading, isError, data, errorText] = useFetch('https://raw.githubusercontent.com/tkmii/perfume/refs/heads/main/perfume.json', 'all')
-  const [filtredData, setFiltredData] = useState(null)
-  const [searchTerm, setSearchTerm] = useState('')
+  const displayedData = useFilterStore((state) => state.filteredData)
+  const setOriginalData = useFilterStore((state) => state.setOriginalData)
 
   useEffect(() => {
-    if (data) {
-      setFiltredData(data)
-    }
-
-    if (searchTerm) {
-      const filteredData = data.filter(item =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFiltredData(filteredData)
-    }
-
-  }, [data, searchTerm])
-  //     setDisplayedData(data)
-  //   }
-
-  //   if (searchTerm) {
-  //     const filteredData = data.filter(item =>
-  //       item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
-  //     setDisplayedData(filteredData)
-  //   }
-
-  // }, [searchTerm, data]);
-
+    setOriginalData(data)
+  }, [data])
 
   return (
     <div>
       <Title />
       <div className="flex-wrapper">
-        <Search value={searchTerm} setValue={setSearchTerm} />
+        <Search data={data} />
         <Sorting />
       </div>
       <div className="page" id="page">
@@ -53,7 +32,7 @@ export function PageCatalog() {
         ) : isError ? (
           <Error text={errorText} />
         ) : (
-          <Catalog data={filtredData} />
+          <Catalog data={displayedData} />
         )}
 
       </div>

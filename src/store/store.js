@@ -5,8 +5,17 @@ export const useFilterDisplayedStore = create((set) => ({
   originalData: [],
   notesItems: [],
   chordsItems: [],
-  priceItems: ['По возрастанию', 'По убыванию'],
-  
+  priceItems: [
+    {
+      text: 'По возрастанию',
+      dataAttr: 'ascending'
+    },
+    {
+      text: 'По убыванию',
+      dataAttr: 'descending'
+    }
+  ],
+
   setData: (data) => set({ originalData: data }),
 
   calculateNotesItems: () => set((state) => {
@@ -31,6 +40,81 @@ export const useFilterDisplayedStore = create((set) => ({
 }))
 
 // Для самих фильтров и поиска
-export const useFilterStore = create((set) => ({
-  
+export const useFilterStore = create((set, get) => ({
+  filteredData: [],
+  notesFilter: [],
+  chordsFilter: [],
+  search: '',
+
+  setOriginalData: (originalData) => {
+    set({ filteredData: originalData });
+  },
+
+  setSearch: (searchTerm) => {
+    set({ search: searchTerm });
+  },
+
+  applySearch: (originalData) => {
+    const searchTerm = get().search
+
+    if (searchTerm) {
+      const filtred = originalData.filter(item => {
+        return item.title.toLowerCase().includes(searchTerm.toLowerCase().trim())
+      });
+      set({ filteredData: filtred });
+    } else {
+      set({ filteredData: originalData });
+    }
+
+  },
+
+  setNotesFilter: (filter) => {
+    set((state) => ({
+      notesFilter: [...state.notesFilter, filter]
+    }));
+  },
+
+  applyNotesFilter: (originalData) => {
+    const notes = get().notesFilter
+
+    if (notes) {
+      const filteredCards = originalData.filter(item => {
+        const allNotes = [
+          ...(item.notes.top || []),
+          ...(item.notes.middle || []),
+          ...(item.notes.basic || [])
+        ];
+
+        return notes.every(filter => allNotes.includes(filter));
+      });
+      set({ filteredData: filteredCards });
+    }
+  },
+
+  setChordsFilter: (filter) => {
+    set((state) => ({
+      chordsFilter: [...state.chordsFilter, filter]
+    }));
+  },
+
+  applyChordsFilter: (originalData) => {
+    const chords = get().chordsFilter
+
+    if (chords) {
+      const filteredCards = originalData.filter(item => {
+        return chords.every(filter => item.chords.includes(filter))
+      });
+      set({ filteredData: filteredCards });
+    }
+  },
+
+  ascendingPrice: (originalData) => {
+    const sortedData = [...originalData].sort((a, b) => a.price - b.price);
+    set({ filteredData: sortedData });
+  },
+
+  descendingPrice: (originalData) => {
+    const sortedData = [...originalData].sort((a, b) => b.price - a.price);
+    set({ filteredData: sortedData });
+  }
 }))
