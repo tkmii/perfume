@@ -1,17 +1,19 @@
-
-import Item from "../components/item";
+import Item from "./item";
 import Error from "./ui/Error";
+import { useCatalogStore } from '../store/store';
 
-export default function Catalog({ data }) {
+export default function Catalog() {
+  const filteredData = useCatalogStore((state) => state.filteredData);
 
-  if (data.length == 0) return <Error text="Результатов нет" />
-  else
-    return (
-      <>
-        <div className="catalog" id="catalog">
-          <Item data={data} />
-        </div>
+  if (!filteredData || filteredData.length === 0) {
+    return <Error text="Результатов нет" />;
+  }
 
-      </>
-    );
+  return (
+    <div className="catalog" id="catalog">
+      {filteredData.map(element => (
+        <Item key={element.id} element={element} />
+      ))}
+    </div>
+  );
 }

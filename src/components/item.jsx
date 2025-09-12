@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types';
 import Spinner from "./ui/spinner";
 import { Link } from 'react-router-dom';
+import { useCatalogStore } from '../store/store'
 
-export default function Item({ data }) {
+export default function Item() {
+  const data = useCatalogStore((state) => state.filteredData)
 
   const listItems = data && data.map(element =>
     <Link to={`/catalog/${element.id}`} className="catalog-item__link" key={element.id}>
@@ -52,7 +53,3 @@ export default function Item({ data }) {
     </>
   );
 }
-
-Item.propTypes = {
-  data: PropTypes.array
-};

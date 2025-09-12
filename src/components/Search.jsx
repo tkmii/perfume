@@ -1,13 +1,11 @@
-import { useFilterStore } from '../store/store'
+import { useCatalogStore } from '../store/store'
 
-export default function Search({ data }) {
-  const search = useFilterStore((state) => { state.search })
-  const setSearch = useFilterStore((state) => state.setSearch)
-  const applySearch = useFilterStore((state) => state.applySearch)
+export default function Search() {
+  const { data, search, setSearch, applyFilters } = useCatalogStore()
 
   const handleChange = (value) => {
     setSearch(value)
-    applySearch(data)
+    applyFilters(data)
   }
 
   return (
