@@ -5,18 +5,8 @@ import { useCatalogStore } from '../store/store'
 
 export default function FilterItem({ type }) {
   const [isHide, setIsHide] = useState(true);
-  const {
-    notesItems,
-    chordsItems,
-    priceItems,
-    toggleNoteFilter,
-    toggleChordFilter,
-    setPriceSort
-  } = useCatalogStore();
-
   const className = `filter-sorting ${isHide ? '' : 'show-all'}`;
-
-  const handleClick = () => setIsHide(!isHide);
+  const { priceItems, notesItems, notesFilter, chordsItems, chordsFilter, toggleNoteFilter, toggleChordFilter, setPriceSort, priceSort } = useCatalogStore();
 
   const getFilterConfig = () => {
     switch (type) {
@@ -24,28 +14,33 @@ export default function FilterItem({ type }) {
         return {
           title: 'По нотам:',
           data: notesItems,
-          handler: toggleNoteFilter
+          handler: toggleNoteFilter,
+          filter: notesFilter
         };
       case 'chords':
         return {
           title: 'По аккордам:',
           data: chordsItems,
-          handler: toggleChordFilter
+          handler: toggleChordFilter,
+          filter: chordsFilter
         };
       case 'price':
         return {
           title: 'По цене:',
           data: priceItems,
-          handler: (item) => setPriceSort(item.dataAttr),
-          isCustom: true
+          handler: (item) => {
+            console.log(item.type)
+            setPriceSort(item.type);
+          },
+          filter: priceSort,
+          isCustom: true,
         };
       default:
         return { title: '', data: [], handler: () => { } };
     }
   };
 
-
-  const { title, data, handler, isCustom } = getFilterConfig();
+  const { title, data, handler, filter, isCustom } = getFilterConfig();
 
   return (
     <div className={className}>
@@ -55,6 +50,7 @@ export default function FilterItem({ type }) {
           <ul className="filter-list">
             {data.map((item) => (
               <li
+                className={`filter-item ${filter && filter.includes(item.type || item) ? 'filter-item__active' : ''}`}
                 key={isCustom ? item.text : item}
                 onClick={() => handler(item)}
               >
@@ -63,7 +59,7 @@ export default function FilterItem({ type }) {
             ))}
           </ul>
           {data.length > 2 && (
-            <ShowHideBtn condition={isHide} handleClick={handleClick} />
+            <ShowHideBtn condition={isHide} handleClick={() => setIsHide(!isHide)} />
           )}
         </>
       ) : (

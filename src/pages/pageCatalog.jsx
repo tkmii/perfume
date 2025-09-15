@@ -1,4 +1,3 @@
-// src/pages/pageCatalog.jsx
 import { useEffect } from 'react';
 import { useCatalogStore } from '../store/store';
 import Catalog from '../components/catalog';
@@ -19,7 +18,7 @@ export function PageCatalog() {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   return (
     <div>

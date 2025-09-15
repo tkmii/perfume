@@ -11,9 +11,7 @@ export default function Catalog() {
 
   return (
     <div className="catalog" id="catalog">
-      {filteredData.map(element => (
-        <Item key={element.id} element={element} />
-      ))}
+      <Item />
     </div>
   );
 }
