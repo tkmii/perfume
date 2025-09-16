@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { useCatalogStore } from '../store/store'
 
 export default function Item() {
-  const data = useCatalogStore((state) => state.filteredData)
+  const filteredData = useCatalogStore(state => state.filteredData)
 
   return (
     <>
-      {data ? (
-        data.map(element => (
+      {filteredData ? (
+        filteredData.map(element => (
           <Link to={`/catalog/${element.id}`} className="catalog-item__link" key={element.id}>
             <div className="catalog-item">
               <button className="catalog-item__icon">

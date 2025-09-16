@@ -1,7 +1,9 @@
 import { useCatalogStore } from '../store/store'
 
 export default function Search() {
-  const { search, setSearch, applySearch } = useCatalogStore()
+  const search = useCatalogStore(state => state.search);
+  const setSearch = useCatalogStore(state => state.setSearch);
+  const applySearch = useCatalogStore(state => state.applySearch);
 
   const handleChange = (value) => {
     setSearch(value)

@@ -9,12 +9,10 @@ import Error from "../components/ui/Error";
 import Spinner from "../components/ui/spinner";
 
 export function PageCatalog() {
-  const {
-    isLoading,
-    isError,
-    errorText,
-    fetchData
-  } = useCatalogStore();
+  const isLoading = useCatalogStore(state => state.isLoading);
+  const isError = useCatalogStore(state => state.isError);
+  const errorText = useCatalogStore(state => state.errorText);
+  const fetchData = useCatalogStore(state => state.fetchData);
 
   useEffect(() => {
     fetchData();

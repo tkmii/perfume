@@ -6,7 +6,15 @@ import { useCatalogStore } from '../store/store'
 export default function FilterItem({ type }) {
   const [isHide, setIsHide] = useState(true);
   const className = `filter-sorting ${isHide ? '' : 'show-all'}`;
-  const { priceItems, notesItems, notesFilter, chordsItems, chordsFilter, toggleNoteFilter, toggleChordFilter, setPriceSort, priceSort } = useCatalogStore();
+  const priceItems = useCatalogStore(state => state.priceItems)
+  const notesItems = useCatalogStore(state => state.notesItems)
+  const notesFilter = useCatalogStore(state => state.notesFilter)
+  const chordsItems = useCatalogStore(state => state.chordsItems)
+  const chordsFilter = useCatalogStore(state => state.chordsFilter)
+  const toggleNoteFilter = useCatalogStore(state => state.toggleNoteFilter)
+  const toggleChordFilter = useCatalogStore(state => state.toggleChordFilter)
+  const setPriceSort = useCatalogStore(state => state.setPriceSort)
+  const priceSort = useCatalogStore(state => state.priceSort);
 
   const getFilterConfig = () => {
     switch (type) {
@@ -29,7 +37,6 @@ export default function FilterItem({ type }) {
           title: 'По цене:',
           data: priceItems,
           handler: (item) => {
-            console.log(item.type)
             setPriceSort(item.type);
           },
           filter: priceSort,
