@@ -1,11 +1,10 @@
-import { getAllNotes, getAllChords, getSearchData, getNewFilter, getPriceSort, filterByInclusion } from "../utils/filterCalculations";
+import { getItemNotes, getItemChords, getSearchData, getNewFilter, getPriceSort, itemIncludesAllFilters } from "/src/utils/filterCalculations";
 
 export const createFilterSlice = (set, get) => ({
   notesFilter: [],
   chordsFilter: [],
   search: '',
   priceSort: null,
-  reset: false,
 
   notesItems: [],
   chordsItems: [],
@@ -20,7 +19,7 @@ export const createFilterSlice = (set, get) => ({
 
   applySearch: () => {
     const { originalData, search } = get();
-    let filtered = getSearchData([...originalData], search)
+    let filtered = getSearchData(originalData, search);
     set({ filteredData: filtered });
   },
 
@@ -31,7 +30,6 @@ export const createFilterSlice = (set, get) => ({
 
       return {
         notesFilter: newNotesFilter,
-        reset: true
       };
     },
     );
@@ -45,7 +43,6 @@ export const createFilterSlice = (set, get) => ({
 
       return {
         chordsFilter: newChordsFilter,
-        reset: true
       };
     });
     get().applyFilters();
@@ -54,7 +51,6 @@ export const createFilterSlice = (set, get) => ({
   setPriceSort: (sortType) => {
     set({
       priceSort: sortType,
-      reset: true
     });
     get().applyFilters();
   },
@@ -66,29 +62,39 @@ export const createFilterSlice = (set, get) => ({
 
     if (notesFilter.length > 0) {
       filtered = filtered.filter(item =>
-        filterByInclusion(item, notesFilter, getAllNotes)
+        itemIncludesAllFilters(item, notesFilter, getItemNotes)
       );
     }
 
     if (chordsFilter.length > 0) {
       filtered = filtered.filter(item =>
-        filterByInclusion(item, chordsFilter, getAllChords)
+        itemIncludesAllFilters(item, chordsFilter, getItemChords)
       );
     }
 
-    getPriceSort(priceSort, filtered)
+    if (priceSort) {
+      filtered = getPriceSort(priceSort, filtered)
+    }
 
     set({ filteredData: filtered });
   },
 
+  shouldShowReset: () => {
+    const { notesFilter, chordsFilter, priceSort } = get();
+
+    return notesFilter.length > 0 ||
+      chordsFilter.length > 0 ||
+      priceSort !== null
+  },
+
   resetFilters: () => {
+
     set({
       search: '',
       notesFilter: [],
       chordsFilter: [],
       priceSort: null,
       filteredData: get().originalData,
-      reset: false
     });
   }
 });

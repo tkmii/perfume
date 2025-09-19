@@ -1,7 +1,12 @@
 import FilterItem from './FilterItem'
 import ResetBtn from './ui/ResetBtn'
+import { useCatalogStore } from '../store/store'
+import { useShallow } from 'zustand/shallow'
 
 export default function Filter() {
+  const shouldShowReset = useCatalogStore(
+    useShallow(state => state.shouldShowReset())
+  );
 
   return (
     <div className="filter">
@@ -9,7 +14,7 @@ export default function Filter() {
       <FilterItem type="price" />
       <FilterItem type="notes" />
       <FilterItem type="chords" />
-      <ResetBtn />
+      {shouldShowReset && <ResetBtn />}
     </div>
   )
 }

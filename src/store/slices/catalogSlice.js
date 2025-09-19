@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllNotes, getAllChords } from "../utils/filterCalculations";
+import { getAllNotes, getAllChords } from "../../utils/filterCalculations";
 
 export const createCatalogSlice = (set, get) => ({
   originalData: [],

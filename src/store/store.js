@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { createCatalogSlice } from "./catalogSlice";
-import { createFilterSlice } from "./filterSlice";
+import { createCatalogSlice } from "./slices/catalogSlice";
+import { createFilterSlice } from "./slices/filterSlice";
 
 export const useCatalogStore = create((...args) => ({
   ...createCatalogSlice(...args),

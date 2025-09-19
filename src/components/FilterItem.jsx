@@ -1,72 +1,68 @@
 import ShowHideBtn from "./ui/ShowHideBtn";
 import Spinner from "./ui/spinner";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useCatalogStore } from '../store/store'
+import { FILTER_CONFIG } from "../utils/variables";
 
 export default function FilterItem({ type }) {
   const [isHide, setIsHide] = useState(true);
-  const className = `filter-sorting ${isHide ? '' : 'show-all'}`;
-  const priceItems = useCatalogStore(state => state.priceItems)
-  const notesItems = useCatalogStore(state => state.notesItems)
-  const notesFilter = useCatalogStore(state => state.notesFilter)
-  const chordsItems = useCatalogStore(state => state.chordsItems)
-  const chordsFilter = useCatalogStore(state => state.chordsFilter)
-  const toggleNoteFilter = useCatalogStore(state => state.toggleNoteFilter)
-  const toggleChordFilter = useCatalogStore(state => state.toggleChordFilter)
-  const setPriceSort = useCatalogStore(state => state.setPriceSort)
-  const priceSort = useCatalogStore(state => state.priceSort);
 
-  const getFilterConfig = () => {
-    switch (type) {
-      case 'notes':
-        return {
-          title: 'По нотам:',
-          data: notesItems,
-          handler: toggleNoteFilter,
-          filter: notesFilter
-        };
-      case 'chords':
-        return {
-          title: 'По аккордам:',
-          data: chordsItems,
-          handler: toggleChordFilter,
-          filter: chordsFilter
-        };
-      case 'price':
-        return {
-          title: 'По цене:',
-          data: priceItems,
-          handler: (item) => {
-            setPriceSort(item.type);
-          },
-          filter: priceSort,
-          isCustom: true,
-        };
-      default:
-        return { title: '', data: [], handler: () => { } };
+  const config = FILTER_CONFIG[type];
+
+  const items = useCatalogStore(config.selector);
+  const filter = useCatalogStore(config.filterSelector);
+  const handlerFunction = useCatalogStore(state => state[config.handler]);
+
+  const { title, isCustom } = useMemo(() => ({
+    title: config?.title || '',
+    isCustom: config?.isCustom || false
+  }), [config]);
+
+  if (!config) {
+    console.warn(`Unknown filter type: ${type}`);
+    return null;
+  }
+
+  const handleItemClick = (item) => {
+    if (isCustom) {
+      handlerFunction(item.type);
+    } else {
+      handlerFunction(item);
     }
   };
 
-  const { title, data, handler, filter, isCustom } = getFilterConfig();
+  const isItemActive = (item) => {
+    if (isCustom) {
+      return filter === item.type;
+    }
+    return filter.includes(item);
+  };
+
+  const shouldShowToggle = items && items.length > 2;
 
   return (
-    <div className={className}>
+    <div className={`filter-sorting ${isHide ? '' : 'show-all'}`}>
       <h3 className="filter-title">{title}</h3>
-      {data ? (
+      {items ? (
         <>
           <ul className="filter-list">
-            {data.map((item) => (
+            {items.map((item) => (
               <li
-                className={`filter-item ${filter && filter.includes(item.type || item) ? 'filter-item__active' : ''}`}
+                className={`filter-item ${isItemActive(item) ? 'filter-item__active' : ''
+                  }`}
                 key={isCustom ? item.text : item}
-                onClick={() => handler(item)}
+                onClick={() => handleItemClick(item)}
+                
               >
                 {isCustom ? item.text : item}
               </li>
             ))}
           </ul>
-          {data.length > 2 && (
-            <ShowHideBtn condition={isHide} handleClick={() => setIsHide(!isHide)} />
+          {shouldShowToggle && (
+            <ShowHideBtn
+              condition={isHide}
+              handleClick={() => setIsHide(!isHide)}
+            />
           )}
         </>
       ) : (
