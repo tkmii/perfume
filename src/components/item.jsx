@@ -30,15 +30,18 @@ export default function Item() {
                   alt=""
                 />
               </div>
-              <h2 className="catalog-item__title">{element.title}</h2>
-              {element.chords && (
-                <div className="catalog-item__descr">
-                  <b>Аккорды:</b> {element.chords.join(', ')}
+              <div className="catalog-item__product-wrapper">
+                <h2 className="catalog-item__title">{element.title}</h2>
+                {element.chords && (
+                  <div className="catalog-item__descr">
+                    <b>Аккорды:</b> {element.chords.join(', ')}
+                  </div>
+                )}
+                <div className="catalog-item__price">
+                  <b>Цена:</b> {element.price.toLocaleString('ru-RU')} руб
                 </div>
-              )}
-              <div className="catalog-item__price">
-                <b>Цена:</b> {element.price.toLocaleString('ru-RU')} руб
               </div>
+              
             </div>
           </Link>
         ))
