@@ -15,6 +15,7 @@ export const createFilterSlice = (set, get) => ({
 
   setSearch: (searchTerm) => {
     set({ search: searchTerm });
+    get().applySearch();
   },
 
   applySearch: () => {

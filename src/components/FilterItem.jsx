@@ -43,7 +43,7 @@ export default function FilterItem({ type }) {
   return (
     <div className={`filter-sorting ${isHide ? '' : 'show-all'}`}>
       <h3 className="filter-title">{title}</h3>
-      {items ? (
+      {items.length > 0 ? (
         <>
           <ul className="filter-list">
             {items.map((item) => (

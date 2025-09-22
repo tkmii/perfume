@@ -3,6 +3,7 @@ import { getAllNotes, getAllChords } from "../../utils/filterCalculations";
 
 export const createCatalogSlice = (set, get) => ({
   originalData: [],
+  // в проекте поиск и фильтры существуют отдельно - так и должно быть, пока что не переделываем. поэтому дублируем состояние filteredData
   filteredData: [],
   isLoading: false,
   isError: false,
