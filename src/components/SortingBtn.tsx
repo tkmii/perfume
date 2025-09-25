@@ -1,6 +1,7 @@
 import { useSortingStore } from '../store/store'
+import { SortingBtnTypes } from '../types'
 
-function SortingBtn({ Svg, type }) {
+function SortingBtn({ Svg, type }: SortingBtnTypes) {
   const toggleSorting = useSortingStore((state) => state.toggleSorting)
 
   return (

@@ -1,4 +1,4 @@
-import { useCatalogStore } from '/src/store/store.js'
+import { useCatalogStore } from '../../store/store'
 
 export default function ResetBtn() {
   const resetFilters = useCatalogStore(state => state.resetFilters)

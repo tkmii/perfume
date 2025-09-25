@@ -1,4 +1,6 @@
-export const getItemNotes = (item) => {
+import { type CatalogItem } from "../types";
+
+export const getItemNotes = (item: CatalogItem) => {
   if (!item) return [];
   if (item.notes && Array.isArray(item.notes)) {
     return item.notes;
@@ -8,41 +10,42 @@ export const getItemNotes = (item) => {
   return [];
 }
 
-export const getItemChords = (item) => {
+export const getItemChords = (item: CatalogItem) => {
   return item?.chords || [];
 }
 
-export const getAllNotes = (data) => {
+export const getAllNotes = (data: CatalogItem[]) => {
   return data.flatMap(item => getItemNotes(item));
 }
 
-export const getAllChords = (data) => {
+export const getAllChords = (data: CatalogItem[]) => {
   return data.flatMap(item => getItemChords(item));
 }
 
-export const getSearchData = (data, search) => {
+export const getSearchData = (data: CatalogItem[], search: string) => {
   const searchTerm = search.toLowerCase().trim();
   return data.filter(item => item.title.toLowerCase().includes(searchTerm));
 }
 
-export const getNewFilter = (currentData, item) => {
+export const getNewFilter = (currentData: string[], item: string) => {
+  console.log(item)
   return currentData.includes(item)
     ? currentData.filter(i => i !== item)
     : [...currentData, item];
 }
 
-export const getPriceSort = (priceSort, data) => {
+export const getPriceSort = (priceSort: string, data: CatalogItem[]) => {
   switch (priceSort) {
     case 'ascending':
-      return data.toSorted((a, b) => a.price - b.price);
+      return [...data].sort((a, b) => a.price - b.price);
     case 'descending':
-      return data.toSorted((a, b) => b.price - a.price);
+      return [...data].sort((a, b) => b.price - a.price);
     default:
       return data; 
   }
 }
 
-export const itemIncludesAllFilters = (item, filterArray, getItemsFunction) => {
+export const itemIncludesAllFilters = (item: CatalogItem, filterArray: string[], getItemsFunction: (item: CatalogItem) => string[]) => {
   const items = getItemsFunction(item);
   return filterArray.every(filter => items.includes(filter));
 }

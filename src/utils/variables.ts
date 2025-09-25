@@ -1,4 +1,6 @@
-export const FILTER_CONFIG = {
+import { type FilterConfig } from '../types'
+
+export const FILTER_CONFIG: FilterConfig = {
   notes: {
     title: 'По нотам:',
     selector: state => state.notesItems,

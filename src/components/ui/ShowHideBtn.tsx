@@ -1,4 +1,6 @@
-export default function ShowHideBtn({ condition, handleClick }) {
+import { type ShowHideBtnProps } from '../../types'
+
+export default function ShowHideBtn({ condition, handleClick }: ShowHideBtnProps) {
 
   return (
     <>

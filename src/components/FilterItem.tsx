@@ -3,8 +3,9 @@ import Spinner from "./ui/spinner";
 import { useState, useMemo } from "react";
 import { useCatalogStore } from '../store/store'
 import { FILTER_CONFIG } from "../utils/variables";
+import { type FilterItemProps } from '../types'
 
-export default function FilterItem({ type }) {
+export default function FilterItem({ type }: FilterItemProps) {
   const [isHide, setIsHide] = useState(true);
 
   const config = FILTER_CONFIG[type];
@@ -23,7 +24,7 @@ export default function FilterItem({ type }) {
     return null;
   }
 
-  const handleItemClick = (item) => {
+  const handleItemClick = (item: any) => {
     if (isCustom) {
       handlerFunction(item.type);
     } else {
@@ -31,7 +32,7 @@ export default function FilterItem({ type }) {
     }
   };
 
-  const isItemActive = (item) => {
+  const isItemActive = (item: any) => {
     if (isCustom) {
       return filter === item.type;
     }
@@ -46,7 +47,7 @@ export default function FilterItem({ type }) {
       {items.length > 0 ? (
         <>
           <ul className="filter-list">
-            {items.map((item) => (
+            {items.map((item: any) => (
               <li
                 className={`filter-item ${isItemActive(item) ? 'filter-item__active' : ''
                   }`}

@@ -13,10 +13,13 @@ export function PageCatalog() {
   const isError = useCatalogStore(state => state.isError);
   const errorText = useCatalogStore(state => state.errorText);
   const fetchData = useCatalogStore(state => state.fetchData);
+  const calculateNotesAndChords = useCatalogStore(state => state.calculateNotesAndChords)
+  const originalData = useCatalogStore(state => state.originalData)
 
   useEffect(() => {
     fetchData();
-  }, []);
+    calculateNotesAndChords();
+  }, [originalData]);
 
   return (
     <div>
