@@ -28,7 +28,6 @@ export const getSearchData = (data: CatalogItem[], search: string) => {
 }
 
 export const getNewFilter = (currentData: string[], item: string) => {
-  console.log(item)
   return currentData.includes(item)
     ? currentData.filter(i => i !== item)
     : [...currentData, item];

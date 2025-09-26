@@ -1,7 +1,9 @@
+import { ReactNode } from "react";
+
 // пропсы для компонентов
 export interface SortingBtnTypes {
   Svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>,
-  type: string
+  type: Sorting
 }
 
 export interface ErrorProps {
@@ -49,7 +51,7 @@ export interface CatalogItem {
   title: string,
 }
 
-// сторы
+// сторы, контекст
 
 export interface FilterSlice {
   notesFilter: string[];
@@ -82,3 +84,14 @@ export interface CatalogSlice {
 }
 
 export type StoreState = FilterSlice & CatalogSlice; 
+
+export interface ChildrenNodeType {
+  children: ReactNode
+}
+
+export type Sorting = 'grid' | 'string'
+
+export interface SortingContextType {
+  sorting: Sorting,
+  toggleSorting: (type: Sorting) => void,
+}

@@ -7,6 +7,7 @@ import Sorting from '../components/Sorting';
 import Title from '../components/Title';
 import Error from "../components/ui/Error";
 import Spinner from "../components/ui/spinner";
+import { SortingProvider } from '../context/SortingContext'
 
 export function PageCatalog() {
   const isLoading = useCatalogStore(state => state.isLoading);
@@ -22,7 +23,7 @@ export function PageCatalog() {
   }, [originalData]);
 
   return (
-    <div>
+    <SortingProvider>
       <Title />
       <div className="flex-wrapper">
         <Search />
@@ -38,6 +39,6 @@ export function PageCatalog() {
           <Catalog />
         )}
       </div>
-    </div>
+    </SortingProvider>
   );
 }

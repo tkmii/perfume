@@ -1,15 +1,15 @@
-import { useSortingStore } from '../store/store'
+import { useSorting } from "../context/SortingContext";
 import { SortingBtnTypes } from '../types'
 
 function SortingBtn({ Svg, type }: SortingBtnTypes) {
-  const toggleSorting = useSortingStore((state) => state.toggleSorting)
+  const { toggleSorting } = useSorting()
 
   return (
     <>
       <button
         className="sorting-btn"
         data-type={type}
-        onClick={(e) => toggleSorting(e.currentTarget.dataset.type)}
+        onClick={(e) => toggleSorting(type)}
       >
         <Svg />
       </button>

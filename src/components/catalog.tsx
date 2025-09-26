@@ -1,18 +1,23 @@
 import Item from "./item";
 import Error from "./ui/Error";
-import { useCatalogStore, useSortingStore } from '../store/store.js';
+import { useCatalogStore } from '../store/store.js';
+import { useSorting } from "../context/SortingContext";
 
 export default function Catalog() {
   const filteredData = useCatalogStore(state => state.filteredData);
-  const sorting = useSortingStore(state => state.sorting)
+  const { sorting } = useSorting();
 
   if (!filteredData || filteredData.length === 0) {
     return <Error text="Результатов нет" />;
   }
 
   return (
-    <div className={`catalog ${sorting === 'grid' ? 'grid' : 'string'}`} id="catalog">
-      <Item />
-    </div>
+      <>
+      <div className={`catalog ${sorting}`} id="catalog">
+        <Item />
+      </div>
+      </>
+      
+    
   );
 }

@@ -6,7 +6,7 @@ import { PageMain } from './pages/pageMain'
 import { PageCart } from './pages/pageCart'
 import { PageItem } from './pages/pageItem'
 import { NotFound } from './pages/NotFound'
-
+ 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
     <Routes>
