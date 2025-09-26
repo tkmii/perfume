@@ -4,6 +4,9 @@ import { useState, useMemo } from "react";
 import { useCatalogStore } from '../store/store'
 import { FILTER_CONFIG } from "../utils/variables";
 import { type FilterItemProps } from '../types'
+import { useScreenWidth } from '../hooks/useScreenWidth'
+
+// TODO: типизацию нормально сделать
 
 export default function FilterItem({ type }: FilterItemProps) {
   const [isHide, setIsHide] = useState(true);
@@ -13,6 +16,7 @@ export default function FilterItem({ type }: FilterItemProps) {
   const items = useCatalogStore(config.selector);
   const filter = useCatalogStore(config.filterSelector);
   const handlerFunction = useCatalogStore(state => state[config.handler]);
+  const device = useScreenWidth()
 
   const { title, isCustom } = useMemo(() => ({
     title: config?.title || '',
@@ -59,7 +63,7 @@ export default function FilterItem({ type }: FilterItemProps) {
               </li>
             ))}
           </ul>
-          {shouldShowToggle && (
+          {(shouldShowToggle && device !== 'isMobile' ) && (
             <ShowHideBtn
               condition={isHide}
               handleClick={() => setIsHide(!isHide)}

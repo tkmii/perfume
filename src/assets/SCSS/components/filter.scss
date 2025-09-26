@@ -4,7 +4,13 @@
   padding: 0 15px;
   padding-bottom: 30px;
   height: 100%;
+  width: 250px;
+  flex-shrink: 0;
 
+  &__wrapper {
+    display: flex;
+    height: fit-content;
+  }
   &-list {
     padding-left: 15px;
     max-height: 70px;
@@ -28,8 +34,15 @@
         transform: rotate(180deg);
       }
     }
+    @media ($mobile) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-height: max-content;
+    }
   }
   &-sorting {
+    width: inherit;
     
     &.show-all {
 
@@ -40,7 +53,7 @@
     }
   }
   .spinner {
-    border: 4px solid #fff;
+    border: 4px solid $white;
     border-top: 4px solid #f9f9f97d;
   }
   &-item {
@@ -58,6 +71,57 @@
 
     &:hover {
       opacity: 0.5;
+    }
+  }
+  @media ($notebook) {
+    width: 200px;
+  }
+  @media ($mobile) {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: calc(100% - 30px);
+    height: auto;
+    border-radius: 0px;
+    transition: $transition, z-index 0.5s ease;
+
+    &.active {
+      opacity: 1;
+      z-index: 2;
+    }
+  }
+}
+
+.filtermob {
+  background-color: $pink;
+  text-align: left;
+  padding: 10px 15px;
+  width: fit-content;
+  border-radius: $br-btn;
+  font-size: 16px;
+
+  &__close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+  &__btns {
+    position: fixed;
+    z-index: 3;
+    right: 15px;
+    bottom: 15px;
+    display: flex;
+    gap: 15px;
+
+    button {
+      font-size: 20px;
+      margin: 0;
+      background-color: $white;
+      padding: 10px 15px;
+      border-radius: $br-btn;
+      border-bottom: none;
     }
   }
 }

@@ -33,6 +33,11 @@ export interface FilterConfig {
   [key: string]: FilterConfigItem;
 }
 
+export interface ScreenWidthConfig {
+  tablet: number,
+  notebook: number,
+}
+
 // данные 
 
 interface Notes {
@@ -94,4 +99,9 @@ export type Sorting = 'grid' | 'string'
 export interface SortingContextType {
   sorting: Sorting,
   toggleSorting: (type: Sorting) => void,
+}
+
+export interface FiltresMobContextType {
+  isActiveFilters: boolean,
+  setIsActiveFilters: (isActiveFilters: boolean) => void
 }

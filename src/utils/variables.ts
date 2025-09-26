@@ -1,4 +1,4 @@
-import { type FilterConfig } from '../types'
+import { type FilterConfig, ScreenWidthConfig } from '../types'
 
 export const FILTER_CONFIG: FilterConfig = {
   notes: {
@@ -21,3 +21,8 @@ export const FILTER_CONFIG: FilterConfig = {
     isCustom: true
   }
 };
+
+export const BREAKPOINTS: ScreenWidthConfig = {
+  tablet: 767,
+  notebook: 1200,
+}

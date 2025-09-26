@@ -3,15 +3,19 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .page {
   display: flex;
   gap: 50px;
   margin-bottom: 50px;
-
-  .filter {
-    width: 250px;
-    flex-shrink: 0;
+  
+  @media ($notebook) {
+    gap: 20px;
+  }
+  @media ($mobile) {
+    flex-direction: column;
   }
 }

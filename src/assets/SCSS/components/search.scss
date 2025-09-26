@@ -8,5 +8,12 @@
     border-radius: 10px;
     border: 1px solid $grey;
     cursor: pointer;
+
+    @media ($mobile) {
+      width: calc(100% - 20px);
+    }
+  }
+  @media ($mobile) {
+    width: 100%;
   }
 }

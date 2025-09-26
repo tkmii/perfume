@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useCatalogStore } from '../store/store';
 import Catalog from '../components/catalog';
 import Search from '../components/Search';
@@ -8,6 +8,8 @@ import Title from '../components/Title';
 import Error from "../components/ui/Error";
 import Spinner from "../components/ui/spinner";
 import { SortingProvider } from '../context/SortingContext'
+import { FiltresMobProvider } from '../context/FiltresMobContext'
+import { useScreenWidth } from '../hooks/useScreenWidth'
 
 export function PageCatalog() {
   const isLoading = useCatalogStore(state => state.isLoading);
@@ -16,6 +18,7 @@ export function PageCatalog() {
   const fetchData = useCatalogStore(state => state.fetchData);
   const calculateNotesAndChords = useCatalogStore(state => state.calculateNotesAndChords)
   const originalData = useCatalogStore(state => state.originalData)
+  const device = useScreenWidth()
 
   useEffect(() => {
     fetchData();
@@ -27,9 +30,10 @@ export function PageCatalog() {
       <Title />
       <div className="flex-wrapper">
         <Search />
-        <Sorting />
+        {device !== 'isMobile' && (<Sorting />)}
       </div>
-      <div className="page" id="page">
+      <FiltresMobProvider >
+        <div className="page" id="page">
         <Filter />
         {isLoading ? (
           <Spinner />
@@ -37,8 +41,10 @@ export function PageCatalog() {
           <Error text={errorText} />
         ) : (
           <Catalog />
-        )}
+        ) }
       </div>
+      </FiltresMobProvider>
+      
     </SortingProvider>
   );
 }
