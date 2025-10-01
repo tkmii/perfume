@@ -1,9 +1,4 @@
+// Стили устроены таким образом, чтобы не плодить кучу мелких файлов. Не переиспользуемые компоненты находятся в файлах страниц (pageCatalog.scss например), а переиспользуемые - в general и ui (пока что)
 @import './assets/SCSS/general.scss';
-@import './assets/SCSS/components/spinner.scss';
-@import './assets/SCSS/components/search.scss';
-@import './assets/SCSS/components/catalog.scss';
-@import './assets/SCSS/components/filter.scss';
-@import './assets/SCSS/components/sorting.scss';
-@import './assets/SCSS/components/title.scss';
+@import './assets/SCSS/ui.scss';
 @import './assets/SCSS/pages/pageCatalog.scss';
-@import './assets/SCSS/components/ui.scss';

@@ -8,13 +8,21 @@ export function FilterMobBtn() {
   const shouldShowReset = useCatalogStore(
     useShallow(state => state.shouldShowReset())
   );
+
+  const scrollAndSetFilters = () => {
+    setIsActiveFilters(false)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
   
   return (
     <>
     {shouldShowReset && (
       <div className="filtermob__btns">
         <ResetBtn />
-        <button onClick={() => setIsActiveFilters(false)}>Применить</button>
+        <button onClick={() => scrollAndSetFilters()}>Применить</button>
       </div>
     )}
     </>

@@ -1,6 +1,7 @@
-@import '../SCSS/variables.scss';
+@import './variables.scss';
 
-/* Общий */
+$main-title: ".main-title";
+
 body {
     font-family: "Jost", serif;
     margin: 0 auto;
@@ -21,4 +22,13 @@ input {
 
 h1, h2, h3 {
     font-weight: 400;
+}
+
+#{$main-title} {
+    font-size: 30px;
+    
+        @media ($mobile) {
+            font-size: 26px;
+            margin: 10px 0;
+        }
 }
