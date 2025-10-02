@@ -1,13 +1,10 @@
-@import './variables.scss';
-
 $main-title: ".main-title";
+$wrapper: ".wrapper";
 
 body {
     font-family: "Jost", serif;
-    margin: 0 auto;
-    max-width: 1250px;
-    font-size: 16px;
-    padding: 0 15px;
+    margin: 0;
+    min-height: 100vh;
 }
 
 button {
@@ -22,10 +19,32 @@ input {
 
 h1, h2, h3 {
     font-weight: 400;
+    margin: 0;
+    line-height: $lh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#root {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#{$wrapper} {
+    margin: 0 auto;
+    max-width: 1250px;
+    font-size: 16px;
+    padding: 0 15px;
 }
 
 #{$main-title} {
     font-size: 30px;
+    margin: 15px 0;
     
         @media ($mobile) {
             font-size: 26px;

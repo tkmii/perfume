@@ -19,6 +19,26 @@ export interface FilterItemProps {
   type: string
 }
 
+export interface WrapperProps {
+  children: ReactNode
+}
+
+export interface LogoProps {
+  width: string,
+  height: string
+}
+
+export interface NavItemProps {
+  link: string,
+  title: string,
+  className?: string 
+}
+
+export interface CopyrightProps {
+  year: string,
+}
+
+
 // переменные
 
 interface FilterConfigItem {
