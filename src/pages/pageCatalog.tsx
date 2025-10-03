@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useCatalogStore } from '../store/store';
 import Catalog from '../components/catalog';
 import Search from '../components/Search';
@@ -10,6 +10,7 @@ import Spinner from "../components/ui/spinner";
 import { SortingProvider } from '../context/SortingContext'
 import { FiltresMobProvider } from '../context/FiltresMobContext'
 import { useScreenWidth } from '../hooks/useScreenWidth'
+import Wrapper from '../components/ui/Wrapper';
 
 export function PageCatalog() {
   const isLoading = useCatalogStore(state => state.isLoading);
@@ -26,7 +27,8 @@ export function PageCatalog() {
   }, [originalData]);
 
   return (
-    <SortingProvider>
+    <Wrapper>
+      <SortingProvider>
       <Title />
       <div className="flex-wrapper">
         <Search />
@@ -46,5 +48,7 @@ export function PageCatalog() {
       </FiltresMobProvider>
       
     </SortingProvider>
+    </Wrapper>
+    
   );
 }

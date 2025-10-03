@@ -38,6 +38,9 @@ export interface CopyrightProps {
   year: string,
 }
 
+export interface DataBannerProps {
+  data: BannerDataTypes[]
+}
 
 // переменные
 
@@ -74,6 +77,11 @@ export interface CatalogItem {
   photo: string,
   price: number,
   title: string,
+}
+
+export interface BannerDataTypes {
+  id: number, 
+  link: string
 }
 
 // сторы, контекст
